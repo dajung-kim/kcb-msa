@@ -1,0 +1,9 @@
+server:
+  port: 11001
+  servlet:
+    context-path: /card
+
+
+spring:
+  profiles:
+    active: development

@@ -1,0 +1,9 @@
+server:
+  port: 13000
+  servlet:
+    context-path: /loan
+
+
+spring:
+  profiles:
+    active: development

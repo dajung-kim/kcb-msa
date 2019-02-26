@@ -1,2 +1,4 @@
 rootProject.name = 'msa'
 include 'user'
+include 'card'
+include 'loan'
