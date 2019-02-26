@@ -20,11 +20,15 @@ Windows의 경우 [Chocolatey](https://chocolatey.org), macos의 경우 [homebre
 git clone https://github.com/korea-credit-bureau/kcb-msa
 ```
 
-내려받은 저장소 디렉토리로 이동해서 어플리케이션을 시작합니다.
+내려받은 저장소 디렉토리로 이동해서 어플리케이션을 시작합니다. Gradle 기반의 Multi Project 구조로 이루어져 있기 때문에 여러개의 서비스 어플리케이션을 동시에 실행해주어야 합니다.
 
 ```bash
 cd kcb-msa
-./gradlew bootRun
+./gradlew --parallel --max-workers=4 bootRun
 ```
  
-이후 http://localhost:9090/user 접속 시 json 데이터가 노출되면 정상적으로 개발환경 구성이 완료 된 것입니다.
+이후 아래 URL에 각각 접근 시 웹 페이지(HAL Browser)가 나타난다면 정상적으로 개발환경 구성이 완료 된 것입니다.
+
+> http://localhost:11000/user  
+> http://localhost:12000/card  
+> http://localhost:13000/loan
