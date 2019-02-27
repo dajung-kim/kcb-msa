@@ -1,12 +1,12 @@
 server:
-  port: 11000
+  port: 14000
 #  servlet:
 #    context-path: /${spring.application.name}
 
 
 spring:
   application:
-    name: user
+    name: edge-service
   profiles:
     active: development
   main:
@@ -20,7 +20,15 @@ eureka:
     preferIpAddress: true
 #    statusPageUrlPath: ${server.servlet.context-path}/info
 #    healthCheckUrlPath: ${server.servlet.context-path}/health
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#        loggerLevel: basic
+
 logging:
   level:
     com.koreacb.msa: debug

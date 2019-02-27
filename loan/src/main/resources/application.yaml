@@ -1,9 +1,21 @@
 server:
   port: 13000
-  servlet:
-    context-path: /loan
+#  servlet:
+#    context-path: /${spring.application.name}
 
 
 spring:
+  application:
+    name: loan
   profiles:
     active: development
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+#    statusPageUrlPath: ${server.servlet.context-path}/info
+#    healthCheckUrlPath: ${server.servlet.context-path}/health
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
