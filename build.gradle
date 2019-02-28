@@ -49,8 +49,8 @@ allprojects {
 
 
     ext {
-        springCloudVersion = 'Finchley.M7'
-        springCloudNetflixVersion = '2.0.0.M2'
+        springCloudVersion = 'Finchley.RELEASE'
+        springCloudNetflixVersion = '2.1.0.RELEASE'
         lombokVersion = '1.18.6'
     }
 }

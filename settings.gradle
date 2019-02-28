@@ -1,6 +1,6 @@
 rootProject.name = 'msa'
+include 'eureka'
 include 'user'
 include 'card'
 include 'loan'
 include 'edge-service'
-include 'eureka'
