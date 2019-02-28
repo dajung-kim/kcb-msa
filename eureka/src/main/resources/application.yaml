@@ -1,0 +1,19 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-registry
+  profiles:
+    active: development
+
+eureka:
+  client:
+    # 자기 자신은 유레카에 등록하지 않는다.
+    registerWithEureka: false
+    fetchRegistry: false
+    healthcheck:
+      enabled: true
+  server:
+    # 정해진 시간안에 heartbeat를 보내지 않는 노드의 비율이 높아지면 네트워크 문제로 간주하고 해당 노드를 레지스트리에 남겨두는데, 이를 self-preservation 모드라고 한다.
+    enable-self-preservation: false

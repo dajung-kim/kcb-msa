@@ -24,11 +24,15 @@ git clone https://github.com/korea-credit-bureau/kcb-msa
 
 ```bash
 cd kcb-msa
-./gradlew --parallel --max-workers=4 bootRun
+./gradlew --parallel bootRun
 ```
  
 이후 아래 URL에 각각 접근 시 웹 페이지(HAL Browser)가 나타난다면 정상적으로 개발환경 구성이 완료 된 것입니다.
 
-> http://localhost:11000/user  
-> http://localhost:12000/card  
-> http://localhost:13000/loan
+> USER: http://localhost:11000  
+> CARD: http://localhost:12000  
+> LOAN: http://localhost:13000
+
+## Service Discovery
+
+본 서비스에서는 Spring Cloud Eureka를 사용하여 내부 도메인을 동적으로 구성합니다. 이를 위해 Eureka 
