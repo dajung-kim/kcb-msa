@@ -1,7 +1,7 @@
 server:
   port: 14000
-#  servlet:
-#    context-path: /${spring.application.name}
+  servlet:
+    context-path: /
 
 
 spring:
@@ -16,10 +16,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    fetch-registry: true
   instance:
     preferIpAddress: true
-#    statusPageUrlPath: ${server.servlet.context-path}/info
-#    healthCheckUrlPath: ${server.servlet.context-path}/health
+    statusPageUrlPath: ${server.servlet.context-path}/info
+    healthCheckUrlPath: ${server.servlet.context-path}/health
 
 #feign:
 #  client:
