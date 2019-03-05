@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh '/var/jenkins_home/workspace/kcb-msa/gradlew clean assemble'
+        sh '/var/jenkins_home/workspace/kcb-msa/gradlew --parallel --max-workers=5 clean assemble'
       }
     }
     stage('Run') {
