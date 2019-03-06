@@ -26,6 +26,9 @@ git clone https://github.com/korea-credit-bureau/kcb-msa
 cd kcb-msa
 ./gradlew --parallel bootRun
 ```
+
+또는 IntelliJ 사용시 Run Dashboard에서 전체 선택 후 왼쪽의 재생버튼을 눌러도 됩니다.
+
  
 이후 아래 URL에 각각 접근 시 웹 페이지(HAL Browser)가 나타난다면 정상적으로 개발환경 구성이 완료 된 것입니다.
 
@@ -52,9 +55,9 @@ Eureka는 다음과 같이 접속 가능합니다.
 
 현재 Eureka 서버의 인스턴스 목록을 보면 `EDGE-SERVICE`라는 항목이 있습니다. 해당 서비스가 Gateway 역할을 통해서 나머지 Micro Service에 직접 요청을 날려주는 일종의 프록시 서버 역할을 하게 되고, 이로 인해 클라이언트에서는 다음과 같이 API를 호출하면 됩니다.
 
-> http://localhost:14000/api/hello
+> http://localhost:18080/api/hello
 
-여기서 14000 포트는 EDGE-SERVICE의 서비스 포트입니다. 
+여기서 18080 포트는 EDGE-SERVICE의 서비스 포트입니다. 
 
 ## API 개발 가이드
 
@@ -75,12 +78,13 @@ Eureka는 다음과 같이 접속 가능합니다.
 
 ### Feign API 추가
 
-아래와 같이 인터페이스를 추가합니다. 인터페이스 갯수는 유레카에서 관리되는 서비스 갯수만큼 존재하면 됩니다. 즉 Micro Service가 3개 라면 각 3개 서비스에 대한 인터페이스가 따로 필요합니다.
+edge-service 프로젝트의 client 패키지는 몇 개의 인터페이스로 구성되어 있습니다. 각 Micro Service에서 제공하는 API를 여기에 명시하면 됩니다.
 ```java
 @FeignClient(name = "user")  // eureka에 등록된 인스턴스 명
 public interface UserClient {
-    @GetMapping(value = "/users/{id}")  // user 서비스에서 제공하는 API URI
-    String getUserInfo(@PathVariable("id") String id);  // 해당 API의 포맷
+    @GetMapping(value = "/users/{id}")  // user 서비스에서 제공하는 API
+    String getUserInfo(@PathVariable("id") String id);  // 해당 API의 형태
 }
 ```
 
+gateway 패키지에서 실제 클라이언트에게 노출될 API를 정의합니다. 각 API는 여러개 Client의 조합으로 구성될 수도 있습니다.

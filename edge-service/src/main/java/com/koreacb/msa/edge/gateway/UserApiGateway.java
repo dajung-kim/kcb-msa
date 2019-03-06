@@ -1,4 +1,4 @@
-package com.koreacb.msa.edge;
+package com.koreacb.msa.edge.gateway;
 
 import com.koreacb.msa.edge.client.UserClient;
 import org.slf4j.Logger;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class CardApiGateway {
-    private final Logger logger = LoggerFactory.getLogger(CardApiGateway.class);
+public class UserApiGateway {
+    private final Logger logger = LoggerFactory.getLogger(UserApiGateway.class);
 
     private final UserClient userClient;
 
     @Autowired
-    CardApiGateway(final UserClient userClient) {
+    UserApiGateway(final UserClient userClient) {
         this.userClient = userClient;
     }
 
-    @GetMapping("/users/{id}/cards")
+    @GetMapping("/users/{id}")
     public String getUserInfo(@PathVariable String id) {
         logger.debug("Id: {}", id);
         return this.userClient.getUserInfo(id);
