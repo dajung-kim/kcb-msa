@@ -76,7 +76,7 @@ Eureka는 다음과 같이 접속 가능합니다.
 하지만 클라이언트에서는 해당 URL을 바로 사용하지 않을 것입니다. 클라이언트에게는 Edge Service만 노출될 것이기 때문입니다. 
 해당 API가 정상적으로 완료된다면 이제 API Gateway에 해당 서비스를 노출합니다.
 
-### Feign API 추가
+### Gateway API 추가
 
 edge-service 프로젝트의 client 패키지는 몇 개의 인터페이스로 구성되어 있습니다. 각 Micro Service에서 제공하는 API를 여기에 명시하면 됩니다.
 ```java
