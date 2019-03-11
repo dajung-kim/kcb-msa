@@ -49,7 +49,7 @@ allprojects {
 
 
     ext {
-        springCloudVersion = 'Finchley.RELEASE'
+        springCloudVersion = 'Greenwich.RELEASE'
         springCloudNetflixVersion = '2.1.0.RELEASE'
         lombokVersion = '1.18.6'
     }

@@ -33,3 +33,11 @@ eureka:
 logging:
   level:
     com.koreacb.msa: debug
+zuul:
+  routes:
+    user:
+      path: /api/users/**
+      stripPrefix: false
+    loan:
+      path: /api/loans/**
+      stripPrefix: false

@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api")
+//@RestController
+//@RequestMapping("/api")
 public class LoanApiGateway {
     private final Logger logger = LoggerFactory.getLogger(LoanApiGateway.class);
 
-    private final LoanClient loanClient;
+//    private final LoanClient loanClient;
 
-    @Autowired
-    public LoanApiGateway(final LoanClient loanClient) {
-        this.loanClient = loanClient;
-    }
+//    @Autowired
+//    public LoanApiGateway(final LoanClient loanClient) {
+//        this.loanClient = loanClient;
+//    }
 
-    @GetMapping("/loans/{id}")
-    public String getLoanInfo(@PathVariable final long id) {
-        logger.debug("Start getting loan information for id {}", id);
-        val loanInfo = loanClient.getLoanInfo(id);
-        logger.debug("Retrieved information: {}", loanInfo);
-        return loanInfo;
-    }
+//    @GetMapping("/loans/{id}")
+//    public String getLoanInfo(@PathVariable final long id) {
+//        logger.debug("Start getting loan information for id {}", id);
+//        val loanInfo = loanClient.getLoanInfo(id);
+//        logger.debug("Retrieved information: {}", loanInfo);
+//        return loanInfo;
+//    }
 }
