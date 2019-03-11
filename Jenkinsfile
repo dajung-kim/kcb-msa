@@ -17,21 +17,25 @@ pipeline {
         }
       }
     }
-    // 유레카 서버 시작
-    stage('Run Eureka') {
-      steps {
-        script {
-          withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-            sh './gradlew eureka:bootRun &'
+    stage('Run Services') {
+      parallel {
+        // 유레카 서버 시작
+        stage('Run Eureka') {
+          steps {
+            script {
+              withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                sh './gradlew eureka:bootRun &'
+              }
+            }
           }
         }
-      }
-    }
-    // 나머지 서버 시작
-    stage('Run Micro Service') {
-      steps {
-        withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-          sh './gradlew --parallel --max-workers=4 user:bootRun card:bootRun loan:bootRun edge-service:bootRun &'
+        // 나머지 서버
+        stage('Run Micro Service') {
+          steps {
+            withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+              sh './gradlew --parallel --max-workers=4 user:bootRun card:bootRun loan:bootRun gateway:bootRun &'
+            }
+          }
         }
       }
     }
