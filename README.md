@@ -59,7 +59,7 @@ Eureka는 다음과 같이 접속 가능합니다.
 > http://localhost:18080/cards/1  
 > http://localhost:18080/loans/1
 
-여기서 18080 포트는 GATEWAY의 서비스 포트입니다. 이 API가 실제로 서비스되는 URL은 아래와 같은데, 클라이언트에게는 Gateway 까지만 노출되고 아래 URL은 노출되지 않습니다.
+여기서 18080 포트는 GATEWAY의 서비스 포트입니다. 이 API가 실제로 서비스되는 URL은 아래와 같은데, 클라이언트 입장에서는 알 필요 없는 정보입니다.
 
 > http://localhost:11000/users/1  
 > http://localhost:12000/cards/1  
@@ -86,8 +86,21 @@ Eureka는 다음과 같이 접속 가능합니다.
 
 ### Gateway(Zuul proxy) 라우팅 설정
 
-Gateway > application.yaml 파일에 다음과 같이 라우팅 설정이 되어있으면 됩니다.
+Gateway > application.yaml 파일에 다음과 같이 라우팅 설정이 되어있으면 됩니다. 차후에 라우팅 규칙이 복잡해질 수록 여기에 설정이 추가되거나 Zuul Filter를 통해서 URL을 Rewrite 하는 방식으로 대응할 수 있습니다.
 
+```yaml
+zuul:
+  routes:     
+    user: # user 서비스로 보낼 uri
+      path: /users/**
+      stripPrefix: false      
+    loan: # loan 서비스로 보낼 uri
+      path: /loans/**
+      stripPrefix: false    
+    card: # card 서비스로 보낼 uri  
+      path: /cards/**
+      stripPrefix: false
+```
 ## 빌드 설정
 
 본 프로젝트의 빌드는 Jenkins를 기반으로 구성되어 있습니다. 빌드는 Declarative pipeline 으로 작성 되어 있습니다. 빌드 환경은 아래에서 접속 가능합니다(AWS Workspace에서 확인 가능).
