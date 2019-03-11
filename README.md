@@ -1,6 +1,15 @@
 # KCB Micro Service Tutorial
 
-본 프로젝트는 Spring Boot 기반의 Micro Service Architecture를 구성하기 위한 간단한 프로젝트 입니다. Gradle 기반의 Multi Project 구조로 구성되어 있습니다.
+본 프로젝트는 Spring Boot 기반의 Micro Service Architecture 구성을 위한 간단한 프로젝트 입니다. 
+Gradle 기반의 Multi Project 구조로 구성되어 있습니다.
+
+## TO DO 
+
+추가적으로 아래 항목들을 진행 예정입니다.
+
+- [ ] 각 Micro Service 별 간단한 API 개발
+- [ ] Profile 커스터마이징 테스트
+- [ ] kafka 등의 Message Queue 연결
 
 ## Requirements
 
