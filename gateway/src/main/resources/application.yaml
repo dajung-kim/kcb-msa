@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: edge-service
+    name: gateway
   profiles:
     active: development
   main:
@@ -22,22 +22,18 @@ eureka:
     statusPageUrlPath: ${server.servlet.context-path}/info
     healthCheckUrlPath: ${server.servlet.context-path}/health
 
-#feign:
-#  client:
-#    config:
-#      default:
-#        connectTimeout: 5000
-#        readTimeout: 5000
-#        loggerLevel: basic
-
 logging:
   level:
     com.koreacb.msa: debug
+
 zuul:
   routes:
     user:
-      path: /api/users/**
+      path: /users/**
       stripPrefix: false
     loan:
-      path: /api/loans/**
+      path: /loans/**
+      stripPrefix: false
+    card:
+      path: /cards/**
       stripPrefix: false

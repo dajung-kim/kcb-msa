@@ -10,8 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
-public class EdgeServiceApplication {
+public class GatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EdgeServiceApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 }

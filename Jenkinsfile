@@ -33,7 +33,7 @@ pipeline {
         stage('Run Micro Service') {
           steps {
             withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-              sh './gradlew --parallel --max-workers=4 user:bootRun card:bootRun loan:bootRun edge-service:bootRun &'
+              sh './gradlew --parallel --max-workers=4 user:bootRun card:bootRun loan:bootRun gateway:bootRun &'
             }
           }
         }
