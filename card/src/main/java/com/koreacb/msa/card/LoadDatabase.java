@@ -13,8 +13,9 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(CardRepository repository) {
         return args -> {
-            System.out.println("Preloading "+ repository.save(new Card(1000000001, "NH", "credit", 500000000, 100000, "20160101")));
-            System.out.println("Preloading "+ repository.save(new Card(1000000002, "KB", "check", 1000000000, 500000, "20171201")));
+            System.out.println("Preloading "+ repository.save(new Card(10001, "NH", "credit", 500000000, 100000, "20160101")));
+            System.out.println("Preloading "+ repository.save(new Card(10001, "IBK", "check", 100000, 250, "20161231")));
+            System.out.println("Preloading "+ repository.save(new Card(10002, "KB", "check", 1000000000, 500000, "20171201")));
         };
     }
 }

@@ -15,13 +15,13 @@ public class CardController {
         this.repository = repository;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/cards")
     List<Card> all() {
        return repository.findAll();
     }
 
-    @GetMapping("/users/{id}")
-    Card one(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
+    @GetMapping("/cards/{usrSeqno}")
+    List<Card> getCardsbyUsrSeqno(@PathVariable("usrSeqno") Long usrSeqno) {
+        return repository.findByUsrSeqno(usrSeqno);
     }
 }
