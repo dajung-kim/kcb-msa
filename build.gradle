@@ -3,9 +3,10 @@ buildscript {
         springBootVersion = '2.1.2.RELEASE'
     }
     repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
+//        mavenCentral()
+//        maven { url "https://repo.spring.io/snapshot" }
+//        maven { url "https://repo.spring.io/milestone" }
+        maven { url "http://localhost:8082/nexus/content/groups/kcb-mvn-group/" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -21,9 +22,10 @@ allprojects {
     targetCompatibility = 1.8
 
     repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
+//        mavenCentral()
+//        maven { url "https://repo.spring.io/snapshot" }
+//        maven { url "https://repo.spring.io/milestone" }
+        maven { url "http://localhost:8082/nexus/content/groups/kcb-mvn-group/" }
     }
 
     test {
@@ -48,7 +50,7 @@ allprojects {
 
 
     ext {
-        springCloudVersion = 'Finchley.SR2'
+        springCloudVersion = 'Greenwich.RELEASE'
         springCloudNetflixVersion = '2.1.0.RELEASE'
         lombokVersion = '1.18.6'
     }

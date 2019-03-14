@@ -1,5 +1,4 @@
 server:
-  port: 13000
   servlet:
     context-path: /
 
@@ -7,7 +6,7 @@ spring:
   application:
     name: loan
   profiles:
-    active: development
+    active: local
 
 eureka:
   client:
@@ -15,11 +14,36 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:10001/eureka}
   instance:
     preferIpAddress: true
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    com.koreacb.msa: debug
+
+---
+# Configuration for localhost
+spring:
+  profiles: local
+server:
+  port: 13001
+
+---
+# Configuration for development server #1
+spring:
+  profiles: dev-1
+server:
+  port: 13001
+
+---
+# Configuration for development server #2
+spring:
+  profiles: dev-2
+server:
+  port: 13002

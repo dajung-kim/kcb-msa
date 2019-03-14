@@ -19,8 +19,8 @@ eureka:
     fetch-registry: true
   instance:
     preferIpAddress: true
-    statusPageUrlPath: ${server.servlet.context-path}/info
-    healthCheckUrlPath: ${server.servlet.context-path}/health
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/info
 
 logging:
   level:
@@ -29,11 +29,11 @@ logging:
 zuul:
   routes:
     user:
-      path: /user*/**
+      path: /users/**
       stripPrefix: false
     loan:
-      path: /loan*/**
+      path: /loans/**
       stripPrefix: false
     card:
-      path: /card*/**
+      path: /cards/**
       stripPrefix: false
