@@ -52,7 +52,7 @@ cd kcb-msa
 
 Eureka는 다음과 같이 접속 가능합니다.
 
-> http://localhost:8761
+> http://localhost:10001
 
 접속 후 화면 중간의 Instance 목록에 4개 서비스가 표시되면 정상적으로 환경 구성이 완료 된 것입니다. 이제 모든 Micro Service 들은 Eureka 서버를 통해서 자기 자신의 서비스를 관리받게 됩니다.
 

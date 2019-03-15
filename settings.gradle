@@ -1,6 +1,9 @@
 rootProject.name = 'msa'
 include 'eureka'
+include 'hystrix-dashboard'
+include 'turbine'
 include 'user'
 include 'card'
 include 'loan'
 include 'gateway'
+

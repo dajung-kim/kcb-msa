@@ -12,13 +12,18 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_URI:http://localhost:10001/eureka}
     fetch-registry: true
   instance:
     preferIpAddress: true
     statusPageUrlPath: ${server.servlet.context-path}/info
     healthCheckUrlPath: ${server.servlet.context-path}/health
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
