@@ -13,8 +13,7 @@ def startup(service) {
   return {
     stage("start ${service}") {
       withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-//        sh "./gradlew ${service}:bootRun & > ./${service}/nohup.out"
-        sh "java -jar ./${service}/build/libs/${service}-0.0.1-SNAPSHOT.jar & > ./${service}/nohup.out"
+        sh "java -jar ./${service}/build/libs/${service}-0.0.1-SNAPSHOT.jar &"
       }
     }
   }
@@ -31,6 +30,13 @@ def shutdown(port){
 pipeline {
   agent any
   stages {
+
+    stage('Checkout') {
+      steps {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/korea-credit-bureau/kcb-msa/']]])
+      }
+    }
+
     // 소스코드 컴파일 및 jar 패키징
     stage('Build') {
       steps {
@@ -39,14 +45,6 @@ pipeline {
         }
       }
     }
-//    // 모든 프로세스 종료
-//    stage('Stop All Running Tasks') {
-//      steps {
-//        script {
-//          sh './gradlew --stop'
-//        }
-//      }
-//    }
 
     stage('Shutdown'){
       steps {
@@ -62,27 +60,5 @@ pipeline {
         }
       }
     }
-//    stage('Run Services') {
-//      parallel {
-//      // 유레카 서버 시작
-//        stage('Run Eureka') {
-//          steps {
-//            script {
-//              withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-//                sh './gradlew eureka:bootRun &'
-//              }
-//            }
-//          }
-//        }
-//        // 나머지 서버
-//        stage('Run Micro Service') {
-//          steps {
-//            withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-//              sh './gradlew --parallel --max-workers=4 user:bootRun card:bootRun loan:bootRun gateway:bootRun &'
-//            }
-//          }
-//        }
-//      }
-//    }
   }
 }
