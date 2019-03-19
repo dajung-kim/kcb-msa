@@ -15,9 +15,18 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:10001/eureka}
   instance:
     preferIpAddress: true
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
 
 turbine:
   cluster-name-expression: new String('default')
   app-config: user, loan, card
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

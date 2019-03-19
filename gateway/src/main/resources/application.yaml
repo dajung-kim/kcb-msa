@@ -1,5 +1,5 @@
 server:
-  port: 18080
+  port: 10004
   servlet:
     context-path: /
 
@@ -37,3 +37,12 @@ zuul:
     card:
       path: /cards/**
       stripPrefix: false
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

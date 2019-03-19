@@ -8,3 +8,16 @@ spring:
     name: hystrix-dashboard
   profiles:
     active: development
+
+logging:
+  level:
+    com.koreacb.msa: debug
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

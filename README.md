@@ -45,6 +45,31 @@ cd kcb-msa
 > CARD: http://localhost:12000  
 > LOAN: http://localhost:13000
 
+## Lineup
+
+각 서비스별 용도 및 사용 포트는 아래와 같습니다.
+
+### 공통 영역
+
+본 샘플에서 공통영역은 100xx 번대 포트를 사용합니다.
+
+| 서비스명 | 포트 | 용도 | 비고 | 
+|--------|----|----|----|
+| Eureka | 10001 | Service Discovery Register | 각각의 Micro Service를 중앙 관리하는 기능 |
+| Hystrix Dashborad | 10002 | Circuit Breaker 모니터링 | 각 Micro Service르 트래픽을 모니터링 하는 기능 |
+| Turbine | 10003 | Hystrix Cluster | Hystrix 모니터링시 Micro Service를 클러스터링하기 위한 기능 |
+| Gateway | 10004 | Edge Service | 각각의 Micro Service로 라우팅을 위한 클라이언트 관점의 End Point |  
+
+### 업무 영역
+
+본 샘플에서 업무영역(업무 도메인 관련 각각의 Micro Service)은 1xxxx 번대 포트를 사용합니다. 
+
+| 서비스명 | 포트 | 용도 | 비고 | 
+|--------|----|----|----|
+| User | 11000 | User Service | 사용자 계정 관련 Micro Service |
+| Card | 12000 | Card Service | 신용카드 관련 Micro Service |
+| Loan | 13000 | Loan Service | 대출 관련 Micro Service |
+
 ## Service Discovery(Eureka)
 
 본 서비스에서는 Spring Cloud Eureka를 사용하여 내부 도메인을 동적으로 구성합니다. 
@@ -62,19 +87,17 @@ Eureka는 다음과 같이 접속 가능합니다.
 사실 굳이 각 서비스별 각각의 URL을 알기란 쉽지도 않고 서비스 제공자 입장에서도 모든 URL을 굳이 노출할 필요가 없습니다.
 이를 위해 API Gateway에서 모든 요청을 받아서 처리할 수 있는 디자인 패턴이 존재 하는데, 이렇게 맨 앞단에서 클라이언트의 요청을 받아서 처리해 주는 서비스를 `Edge Service`라고 합니다.
 
-현재 Eureka 서버의 인스턴스 목록을 보면 `GATEWAY`라는 항목이 있습니다. 해당 서비스가 나머지 Micro Service에 각각의 요청을 라우팅해주는 역할을 하게 되고, 이로 인해 클라이언트에서는 다음과 같이 API를 호출하면 됩니다.
+현재 Eureka 서버의 인스턴스 목록을 보면 `GATEWAY`라는 항목이 있습니다. 
+클라이언트가 Gateway 서비스 포트를 이용해서 요청을 보내면, Gateway는 Zuul Proxy 및 Eureka 정보를 바탕으로 해당 요청이 어느 Micro Service로 전달될지를 판단해서 라우팅을 수행합니다.    
+이를 통해서 클라이언트 또는 웹서버단에는 10004 포트만 노출하면 되고 나머지 포트 정보는 숨길 수 있습니다.
 
-> http://localhost:18080/users/1  
-> http://localhost:18080/cards/1  
-> http://localhost:18080/loans/1
+| 클라이언트가 요청하는 주소         | 실제 서비스 되는 주소              |
+|--------------------------------|--------------------------------| 
+| http://localhost:10004/users/1 | http://localhost:11000/users/1 |
+| http://localhost:10004/cards/1 | http://localhost:12000/cards/1 |
+| http://localhost:10004/loans/1 | http://localhost:13000/loans/1 | 
 
-여기서 18080 포트는 GATEWAY의 서비스 포트입니다. 이 API가 실제로 서비스되는 URL은 아래와 같은데, 클라이언트 입장에서는 알 필요 없는 정보입니다.
-
-> http://localhost:11000/users/1  
-> http://localhost:12000/cards/1  
-> http://localhost:13000/loans/1
-
-이를 통해서 클라이언트 또는 웹서버단에는 18080만 노출하고 나머지 서버는 Zuul Proxy 및 Eureka를 통해서 동적으로 라우팅 및 구성이 가능하게 됩니다.
+그 외 기타 설정을 통해서 여러가지 API 조합도 가능하게 됩니다(TBD).   
 
 ## API 개발 가이드
 
@@ -110,6 +133,19 @@ zuul:
       path: /cards/**
       stripPrefix: false
 ```
+
+## Circuit Breaker
+
+각각의 Micro Service 내에서 오류가 발생하는 경우, 그리고 이러한 오류가 지속되는 경우 해당 인스턴스를 차단하여 서비스 가용성 저하를 방지할 수 있습니다. 
+이렇게 오류가 발생하는 인스턴스로의 트래픽을 차단해 주는 기능을 Circuit Breadker라고 하는데 본 프로젝트에서는 Netflix Hystrix를 활용하여 이를 구현하였습니다.
+
+Hystrix는 현재 트래픽에 대한 모니터링 대시보드를 제공하는데 다음 URL에 접속해서 확인할 수 있습니다.
+
+> http://localhost:10002/hystrix
+
+화면에 URL을 입력하는 input에 `http://localhost:10003/turbine.stream`를 입력하면 모니터링을 위한 대시보드 준비가 완료된 것입니다. 
+최초에는 빈 화면이 나오는데 트래픽이 발생하게 되면 그 때부터 모니터링 항목이 조회됩니다. 모니터링을 위한 샘플 API(http://localhost:10004/loans/hello?name=world)를 호출해 보시기 바랍니다.   
+
 ## 빌드 설정
 
 본 프로젝트의 빌드는 Jenkins를 기반으로 구성되어 있습니다. 빌드는 Declarative pipeline 으로 작성 되어 있습니다. 빌드 환경은 아래에서 접속 가능합니다(AWS Workspace에서 확인 가능).

@@ -5,7 +5,6 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     implementation "org.springframework.data:spring-data-rest-hal-browser"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
     implementation "joda-time:joda-time:2.10.1"
