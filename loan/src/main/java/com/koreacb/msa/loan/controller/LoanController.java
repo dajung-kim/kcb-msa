@@ -2,7 +2,7 @@ package com.koreacb.msa.loan.controller;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.koreacb.msa.loan.Description;
+import com.koreacb.msa.loan.model.Description;
 import com.koreacb.msa.loan.model.Loan;
 import com.koreacb.msa.loan.model.Service;
 import com.koreacb.msa.loan.repository.LoanRepository;

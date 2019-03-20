@@ -1,4 +1,4 @@
-package com.koreacb.msa.loan;
+package com.koreacb.msa.loan.model;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
