@@ -20,7 +20,7 @@ eureka:
   instance:
     preferIpAddress: true
     statusPageUrlPath: ${server.servlet.context-path}actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
 
 logging:
   level:
