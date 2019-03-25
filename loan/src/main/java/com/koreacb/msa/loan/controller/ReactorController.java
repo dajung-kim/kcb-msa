@@ -39,6 +39,7 @@ public class ReactorController {
         val loan = loanRepository.findById(id);
         val json = new Gson().toJson(loan.get(), Loan.class);
         log.debug("Retrieved result: {}", json);
+
         return Mono.just(json);
     }
 
