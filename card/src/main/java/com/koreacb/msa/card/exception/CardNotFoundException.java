@@ -1,4 +1,4 @@
-package com.koreacb.msa.card;
+package com.koreacb.msa.card.exception;
 
 public class CardNotFoundException extends RuntimeException {
 
