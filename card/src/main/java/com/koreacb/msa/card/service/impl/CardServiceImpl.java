@@ -23,7 +23,7 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<Card> findByTxAgncCd(String txAgncCd) {
         List<Card> cards = cardDao.selectCardByTxAgncCd(txAgncCd);
-        return cards.stream().map(s -> new Card(s.getMgt_acct_no(), s.getSt_dt().substring(0, 4) + "년" + s.getSt_dt().substring(4, 6) + "월" + s.getSt_dt().substring(6, 8) + "일", s.getEnd_dt().substring(0, 4) + "년" + s.getEnd_dt().substring(4, 6) + "월" + s.getEnd_dt().substring(6, 8) + "일", (s.getCard_stat_cd() == "01") ? "정상" : (s.getCard_stat_cd() == "03") ? "종료" : "에러", s.getCrdt_yn(), s.getTot_mlt_amt(), s.getTx_agnc_cd())).collect(Collectors.toList());
+        return cards.stream().map(s -> new Card(s.getMgt_acct_no(), s.getSt_dt().substring(0, 4) + "년" + s.getSt_dt().substring(4, 6) + "월" + s.getSt_dt().substring(6, 8) + "일", s.getEnd_dt().substring(0, 4) + "년" + s.getEnd_dt().substring(4, 6) + "월" + s.getEnd_dt().substring(6, 8) + "일", s.getCard_stat_cd(), s.getCrdt_yn(), s.getTot_mlt_amt(), s.getTx_agnc_cd())).collect(Collectors.toList());
         //return stream;
 
 
