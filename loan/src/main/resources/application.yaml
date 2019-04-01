@@ -1,12 +1,13 @@
 server:
   servlet:
     context-path: /
-
 spring:
   application:
     name: loan
   profiles:
     active: local
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   client:

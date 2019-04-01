@@ -1,6 +1,5 @@
 package com.koreacb.msa.loan.model;
 
-import com.koreacb.msa.loan.Description;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,11 +26,11 @@ public class Service {
         for (Parameter parameter : parameters) {
             RequestParam requestParam = parameter.getAnnotation(RequestParam.class);
             if (requestParam != null) {
-                this.input.add(requestParam.value() + "|" + parameter.getType().getTypeName());
+                this.input.add(requestParam.value() + "|" + parameter.getType().getName());
             } else {
                 PathVariable pathVariable = parameter.getAnnotation(PathVariable.class);
                 if (pathVariable != null) {
-                    this.input.add(pathVariable.value() + "|" + parameter.getType().getTypeName());
+                    this.input.add(pathVariable.value() + "|" + parameter.getType().getName());
                 }
             }
         }
