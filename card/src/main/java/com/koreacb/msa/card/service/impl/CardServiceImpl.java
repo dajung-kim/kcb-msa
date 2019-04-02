@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("cardServiceImpl")
+@Service
 public class CardServiceImpl implements CardService {
 
     @Autowired
@@ -22,11 +22,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public List<Card> findByTxAgncCd(String txAgncCd) {
-        List<Card> cards = cardDao.selectCardByTxAgncCd(txAgncCd);
-        return cards.stream().map(s -> new Card(s.getMgt_acct_no(), s.getSt_dt().substring(0, 4) + "년" + s.getSt_dt().substring(4, 6) + "월" + s.getSt_dt().substring(6, 8) + "일", s.getEnd_dt().substring(0, 4) + "년" + s.getEnd_dt().substring(4, 6) + "월" + s.getEnd_dt().substring(6, 8) + "일", s.getCard_stat_cd(), s.getCrdt_yn(), s.getTot_mlt_amt(), s.getTx_agnc_cd())).collect(Collectors.toList());
-        //return stream;
-
-
-        //return cardListMapper.selectCardByTxAgncCd(txAgncCd);
+        List<Card> cards = cardDao.selectCardsByTxAgncCd(txAgncCd);
+        return cards.stream().map(s -> new Card(s.getMgtAcctNo(), s.getStDt().substring(0, 4) + "년" + s.getStDt().substring(4, 6) + "월" + s.getStDt().substring(6, 8) + "일", s.getEndDt().substring(0, 4) + "년" + s.getEndDt().substring(4, 6) + "월" + s.getEndDt().substring(6, 8) + "일", s.getCardStatCd(), s.getCrdtYn(), s.getTotMltAmt(), s.getTxAgncCd())).collect(Collectors.toList());
     }
 }

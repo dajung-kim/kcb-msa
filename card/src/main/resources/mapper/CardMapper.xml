@@ -14,11 +14,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.koreacb.msa.card.mapper.CardMapper">
+<mapper namespace="CardMapper">
     <select id="selectCardByMgtAcctNo" resultType="Card">
         SELECT * FROM tb_card_list WHERE MGT_ACCT_NO = #{mgtAcctNo}
     </select>
-    <select id="selectCardByTxAgncCd" resultType="List<Card>">
+    <select id="selectCardsByTxAgncCd" resultType="Card">
         SELECT * FROM tb_card_list WHERE TX_AGNC_CD = #{txAgncCd}
     </select>
 

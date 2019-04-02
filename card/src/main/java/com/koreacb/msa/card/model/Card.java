@@ -1,21 +1,21 @@
 package com.koreacb.msa.card.model;
 
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card {
 
-    private @Id String mgt_acct_no;
-    private String st_dt;
-    private String end_dt;
-    private String card_stat_cd;
-    private String crdt_yn;
-    private long tot_mlt_amt;
-    private String tx_agnc_cd;
+    private @Id String mgtAcctNo;
+    private String stDt;
+    private String endDt;
+    private String cardStatCd;
+    private String crdtYn;
+    private long totMltAmt;
+    private String txAgncCd;
 }

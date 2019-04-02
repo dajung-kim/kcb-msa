@@ -18,7 +18,7 @@ public class CardDao {
         return this.sqlSession.selectOne("selectCardByMgtAcctNo", mgtAcctNo);
     }
 
-    public List<Card> selectCardByTxAgncCd(String txAgncCd){
-        return this.sqlSession.selectList("selectCardByTxAgncCd", txAgncCd);
+    public List<Card> selectCardsByTxAgncCd(String txAgncCd){
+        return this.sqlSession.selectList("selectCardsByTxAgncCd", txAgncCd);
     }
 }
