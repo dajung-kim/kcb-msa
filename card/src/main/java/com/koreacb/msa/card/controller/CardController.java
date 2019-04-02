@@ -1,5 +1,7 @@
 package com.koreacb.msa.card.controller;
 
+import com.koreacb.msa.card.core.Result;
+import com.koreacb.msa.card.core.ResultGenerator;
 import com.koreacb.msa.card.model.Card;
 import com.koreacb.msa.card.service.impl.CardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,11 @@ public class CardController {
     @GetMapping("/cards/{MGT_ACCT_NO}")
     public Card getCardByMgtAcctNo(@PathVariable("MGT_ACCT_NO") String mgt_acct_no) {
         return cardServiceImpl.findByMgtAcctNo(mgt_acct_no);
+    }
+
+    @GetMapping("/result/cards")
+    public String getResultByTxAgncCd(@RequestParam("type") String txAgncCd) {
+        return ResultGenerator.genSuccessResult(cardServiceImpl.findByTxAgncCd(txAgncCd)).toString();
     }
 
 
