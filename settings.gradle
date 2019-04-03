@@ -7,4 +7,5 @@ include 'card'
 include 'loan'
 include 'gateway'
 include 'config-server'
+include 'kafka'
 

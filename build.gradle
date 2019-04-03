@@ -1,7 +1,6 @@
 buildscript {
     ext {
         springBootVersion = '2.1.0.RELEASE'
-        lombokVersion = '1.18.6'
     }
     repositories {
         mavenCentral()
@@ -40,6 +39,8 @@ allprojects {
     }
 
     ext {
+        lombokVersion = '1.18.6'
+        reactorVersion = '3.2.6.RELEASE'
         springCloudVersion = 'Greenwich.RELEASE'
         springCloudNetflixVersion = '2.1.0.RELEASE'
     }
