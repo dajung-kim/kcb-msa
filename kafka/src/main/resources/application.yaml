@@ -1,0 +1,23 @@
+server:
+  port: 10005
+  servlet:
+    context-path: /
+
+spring:
+  kafka:
+    consumer:
+      group-id: kafka-intro
+    bootstrap-servers: localhost:9092
+
+logging:
+  level:
+    com.koreacb.msa: debug
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
