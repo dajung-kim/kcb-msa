@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: loan
+  cloud:
+    config:
+      uri: http://localhost:10005
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true

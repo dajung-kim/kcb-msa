@@ -6,18 +6,24 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @EnableCircuitBreaker
 @SpringBootApplication
 @Slf4j
+@RefreshScope
 public class LoanApplication implements ApplicationRunner {
 
     private final LoanRepository loanRepository;
+
+    @Value("${global.value}")
+    private String configTestValue;
 
     @Autowired
     public LoanApplication(LoanRepository loanRepository) {
@@ -35,5 +41,6 @@ public class LoanApplication implements ApplicationRunner {
         loanRepository.save(new Loan(2, 1, 100000000, 100000000, now.minusYears(5).toDate(), now.plusYears(1).toDate()));
         loanRepository.save(new Loan(3, 1, 20000000, 1, now.minusMonths(2).toDate(), now.plusDays(33).toDate()));
         log.debug("Inserting automatically generated data");
+        log.debug("from Config: {}", configTestValue);
     }
 }

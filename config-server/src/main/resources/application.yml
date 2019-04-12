@@ -12,7 +12,7 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/configs
+          search-locations: classpath:/configs,classpath:config/global.yaml
 
 eureka:
   client:
@@ -28,3 +28,7 @@ management:
     web:
       exposure:
         include: "*"
+
+common:
+  config:
+    value: test!

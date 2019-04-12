@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
@@ -27,9 +29,12 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/loans")
 @Slf4j
+@RefreshScope
 public class LoanController {
 
     private final LoanRepository loanRepository;
+    @Value("${loan.config.value}")
+    private String fromConfig;
 
     @Autowired
     public LoanController(LoanRepository loanRepository) {
@@ -41,6 +46,8 @@ public class LoanController {
     @Description("이름을 입력받아서 화면에 출력해 주는 API")
     public String loanGreeting(@RequestParam(required = false) final String name) {
         log.debug("/hello");
+        log.debug("fromConfig: {}", fromConfig);
+
         if (name == null) {
             throw new IllegalStateException("Error occurred!");
         }
